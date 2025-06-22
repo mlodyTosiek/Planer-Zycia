@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planer Życia - Inteligentny asystent codzienności</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Dodajemy Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navbar -->
+    <nav class="bg-white shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <h1 class="text-xl font-bold text-gray-900">Planer Życia</h1>
+                </div>
+                <div class="flex items-center">
+                    <span class="text-sm text-gray-500">Witaj w swoim asystencie codzienności</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Kalendarz i Zadania (duplicate removed) -->
+            <div class="bg-white p-6 rounded-lg shadow">
+                <h2 class="text-lg font-semibold mb-4">Kalendarz i Zadania</h2>
+                <form id="tasks-form" class="space-y-3">
+                    <div class="text-sm text-gray-600">
+                        <p class="font-medium">Dzisiaj</p>
+                        <ul id="tasks-list" class="mt-2 space-y-2"></ul>
+                        <div class="flex mt-2">
+                            <input id="new-task-input" type="text" class="flex-1 border rounded-l px-2 py-1 text-sm focus:outline-none" placeholder="Dodaj nowe zadanie...">
+                            <button type="submit" class="bg-blue-500 text-white px-3 py-1 rounded-r text-sm">Dodaj</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow">
+                <h2 class="text-lg font-semibold mb-4">Kalendarz i Zadania</h2>
+                <form id="tasks-form" class="space-y-3">
+                    <div class="text-sm text-gray-600">
+                        <p class="font-medium">Dzisiaj</p>
+                        <ul id="tasks-list" class="mt-2 space-y-2"></ul>
+                        <div class="flex mt-2">
+                            <input id="new-task-input" type="text" class="flex-1 border rounded-l px-2 py-1 text-sm focus:outline-none" placeholder="Dodaj nowe zadanie...">
+                            <button type="submit" class="bg-blue-500 text-white px-3 py-1 rounded-r text-sm">Dodaj</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Śledzenie Nawyków -->
+            <!-- Nawyki (duplicate removed) -->
+            <div class="bg-white p-6 rounded-lg shadow">
+                <h2 class="text-lg font-semibold mb-4">Nawyki</h2>
+                <form id="habits-form" class="space-y-3">
+                    <ul id="habits-list" class="space-y-2"></ul>
+                    <div class="flex mt-2">
+                        <input id="new-habit-input" type="text" class="flex-1 border rounded-l px-2 py-1 text-sm focus:outline-none" placeholder="Dodaj nowy nawyk...">
+                        <button type="submit" class="bg-blue-500 text-white px-3 py-1 rounded-r text-sm">Dodaj</button>
+                    </div>
+                </form>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow">
+                <h2 class="text-lg font-semibold mb-4">Nawyki</h2>
+                <form id="habits-form" class="space-y-3">
+                    <ul id="habits-list" class="space-y-2"></ul>
+                    <div class="flex mt-2">
+                        <input id="new-habit-input" type="text" class="flex-1 border rounded-l px-2 py-1 text-sm focus:outline-none" placeholder="Dodaj nowy nawyk...">
+                        <button type="submit" class="bg-blue-500 text-white px-3 py-1 rounded-r text-sm">Dodaj</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Cele -->
+            <!-- Cele (duplicate removed) -->
+            <div class="bg-white p-6 rounded-lg shadow">
+                <h2 class="text-lg font-semibold mb-4">Cele</h2>
+                <form id="goals-form" class="space-y-4">
+                    <ul id="goals-list" class="space-y-2"></ul>
+                    <div class="flex mt-2">
+                        <input id="new-goal-input" type="text" class="flex-1 border rounded-l px-2 py-1 text-sm focus:outline-none" placeholder="Dodaj nowy cel...">
+                        <input id="new-goal-progress" type="number" min="0" max="100" class="w-20 border-t border-b border-r rounded-r px-2 py-1 text-sm focus:outline-none" placeholder="%">
+                        <button type="submit" class="bg-blue-500 text-white px-3 py-1 rounded text-sm ml-2">Dodaj</button>
+                    </div>
+                </form>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow">
+                <h2 class="text-lg font-semibold mb-4">Cele</h2>
+                <form id="goals-form" class="space-y-4">
+                    <ul id="goals-list" class="space-y-2"></ul>
+                    <div class="flex mt-2">
+                        <input id="new-goal-input" type="text" class="flex-1 border rounded-l px-2 py-1 text-sm focus:outline-none" placeholder="Dodaj nowy cel...">
+                        <input id="new-goal-progress" type="number" min="0" max="100" class="w-20 border-t border-b border-r rounded-r px-2 py-1 text-sm focus:outline-none" placeholder="%">
+                        <button type="submit" class="bg-blue-500 text-white px-3 py-1 rounded text-sm ml-2">Dodaj</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Inspirujący Cytat -->
+            <div class="bg-white p-6 rounded-lg shadow md:col-span-2 lg:col-span-3">
+                <div class="text-center">
+                    <p class="text-lg italic text-gray-600">"Największą chwałą nie jest nigdy nie upaść, ale powstać za każdym razem, gdy upadniemy."</p>
+                    <p class="mt-2 text-sm text-gray-500">- Konfucjusz</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white mt-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+            <p class="text-center text-sm text-gray-500">© 2025 Planer Życia. Wszystkie prawa zastrzeżone.</p>
+        </div>
+    </footer><hea
+    <script src="main.js"></script>
+</body>
+</html>

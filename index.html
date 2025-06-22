@@ -5,35 +5,51 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Planer Życia - Inteligentny asystent codzienności</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Dodajemy Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         body {
             font-family: 'Inter', sans-serif;
         }
     </style>
 </head>
-<body class="bg-gray-50">
+<body class="bg-gradient-to-br from-blue-100 via-purple-100 to-pink-100 min-h-screen">
     <!-- Navbar -->
-    <nav class="bg-white shadow-sm">
+    <nav class="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 shadow-lg">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-16">
-                <div class="flex items-center">
-                    <h1 class="text-xl font-bold text-gray-900">Planer Życia</h1>
-                </div>
-                <div class="flex items-center">
-                    <span class="text-sm text-gray-500">Witaj w swoim asystencie codzienności</span>
+            <div class="flex justify-between h-16 items-center">
+                <h1 class="text-2xl font-extrabold text-white tracking-wide">Planer Życia</h1>
+                <div class="flex space-x-4">
+                    <button class="tab-btn text-white px-4 py-2 rounded hover:bg-white hover:text-blue-600 transition" data-tab="dashboard">Dashboard</button>
+                    <button class="tab-btn text-white px-4 py-2 rounded hover:bg-white hover:text-purple-600 transition" data-tab="tasks">Zadania</button>
+                    <button class="tab-btn text-white px-4 py-2 rounded hover:bg-white hover:text-pink-600 transition" data-tab="habits">Nawyki</button>
+                    <button class="tab-btn text-white px-4 py-2 rounded hover:bg-white hover:text-green-600 transition" data-tab="goals">Cele</button>
                 </div>
             </div>
         </div>
     </nav>
 
-    <!-- Main Content -->
+    <!-- Main Content with Tabs -->
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <!-- Kalendarz i Zadania (duplicate removed) -->
+        <div id="tab-dashboard" class="tab-content">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-white rounded-lg shadow p-6 flex flex-col justify-between">
+                    <h2 class="text-lg font-bold text-blue-600 mb-4">Witamy w Planerze Życia!</h2>
+                    <p class="text-gray-700 mb-4">Twój osobisty, kolorowy asystent codzienności. Korzystaj z zakładek, aby zarządzać zadaniami, nawykami i celami. Sprawdź swoje postępy na wykresach!</p>
+                    <div class="bg-gradient-to-r from-blue-200 via-purple-200 to-pink-200 rounded-lg p-4 text-center">
+                        <p class="text-xl italic text-gray-700">"Największą chwałą nie jest nigdy nie upaść, ale powstać za każdym razem, gdy upadniemy."</p>
+                        <p class="mt-2 text-sm text-gray-500">- Konfucjusz</p>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow p-6 flex flex-col items-center">
+                    <h2 class="text-lg font-bold text-purple-600 mb-4">Postęp celów</h2>
+                    <canvas id="goalsChart" width="300" height="300"></canvas>
+                </div>
+            </div>
+        </div>
+        <div id="tab-tasks" class="tab-content hidden">
             <div class="bg-white p-6 rounded-lg shadow">
-                <h2 class="text-lg font-semibold mb-4">Kalendarz i Zadania</h2>
+                <h2 class="text-lg font-semibold mb-4 text-blue-600">Kalendarz i Zadania</h2>
                 <form id="tasks-form" class="space-y-3">
                     <div class="text-sm text-gray-600">
                         <p class="font-medium">Dzisiaj</p>
@@ -45,16 +61,504 @@
                     </div>
                 </form>
             </div>
+        </div>
+        <div id="tab-habits" class="tab-content hidden">
+            <div class="bg-white p-6 rounded-lg shadow">
+                <h2 class="text-lg font-semibold mb-4 text-pink-600">Nawyki</h2>
+                <form id="habits-form" class="space-y-3">
+                    <ul id="habits-list" class="space-y-2"></ul>
+                    <div class="flex mt-2">
+                        <input id="new-habit-input" type="text" class="flex-1 border rounded-l px-2 py-1 text-sm focus:outline-none" placeholder="Dodaj nowy nawyk...">
+                        <button type="submit" class="bg-pink-500 text-white px-3 py-1 rounded-r text-sm">Dodaj</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div id="tab-goals" class="tab-content hidden">
+            <div class="bg-white p-6 rounded-lg shadow">
+                <h2 class="text-lg font-semibold mb-4 text-green-600">Cele</h2>
+                <form id="goals-form" class="space-y-4">
+                    <ul id="goals-list" class="space-y-2"></ul>
+                    <div class="flex mt-2">
+                        <input id="new-goal-input" type="text" class="flex-1 border rounded-l px-2 py-1 text-sm focus:outline-none" placeholder="Dodaj nowy cel...">
+                        <input id="new-goal-progress" type="number" min="0" max="100" class="w-20 border-t border-b border-r rounded-r px-2 py-1 text-sm focus:outline-none" placeholder="%">
+                        <button type="submit" class="bg-green-500 text-white px-3 py-1 rounded text-sm ml-2">Dodaj</button>
+                    </div>
+                </form>
+                <div class="mt-8">
+                    <h3 class="text-md font-semibold mb-2 text-green-700">Wizualizacja celów</h3>
+                    <canvas id="goalsChartTab" width="400" height="200"></canvas>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 mt-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+            <p class="text-center text-sm text-white">© 2025 Planer Życia. Wszystkie prawa zastrzeżone.</p>
+        </div>
+    </footer>
+    <script src="main.js"></script>
+    <script>
+    // Zakładki
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    const tabContents = document.querySelectorAll('.tab-content');
+    tabBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            tabContents.forEach(tc => tc.classList.add('hidden'));
+            document.getElementById('tab-' + btn.dataset.tab).classList.remove('hidden');
+        });
+    });
+
+    // Wykresy Chart.js
+    function renderGoalsChart(ctx, data) {
+        return new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: data.labels,
+                datasets: [{
+                    data: data.values,
+                    backgroundColor: [
+                        '#3b82f6', '#a21caf', '#f472b6', '#22c55e', '#f59e42', '#f43f5e', '#6366f1'
+                    ],
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                cutout: '70%',
+                plugins: {
+                    legend: { display: true, position: 'bottom' }
+                }
+            }
+        });
+    }
+
+    // Synchronizacja wykresów z celami
+    function getGoalsData() {
+        const items = document.querySelectorAll('#goals-list li');
+        const labels = [];
+        const values = [];
+        items.forEach(li => {
+            const name = li.querySelector('.text-sm.font-medium')?.textContent || 'Cel';
+            const percent = li.querySelector('.text-sm.text-gray-500')?.textContent?.replace('%','') || '0';
+            labels.push(name);
+            values.push(Number(percent));
+        });
+        return { labels, values };
+    }
+
+    let goalsChart, goalsChartTab;
+    function updateCharts() {
+        const data = getGoalsData();
+        if (goalsChart) goalsChart.destroy();
+        if (goalsChartTab) goalsChartTab.destroy();
+        const ctx1 = document.getElementById('goalsChart').getContext('2d');
+        const ctx2 = document.getElementById('goalsChartTab').getContext('2d');
+        goalsChart = renderGoalsChart(ctx1, data);
+        goalsChartTab = renderGoalsChart(ctx2, data);
+    }
+    // Aktualizuj wykresy po dodaniu celu
+    document.addEventListener('DOMContentLoaded', () => {
+        updateCharts();
+        document.getElementById('goals-form').addEventListener('submit', () => {
+            setTimeout(updateCharts, 100);
+        });
+    });
+    </script>
+</body>
+</html>
+                                <div class=""grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <h2 class=""text-lg font-semibold mb-4">Kalendarz i Zadania</h2><h2>                <form id="tasks-form" class="space-y-3">
+                                        <div class="text-sm text-gray-600">
+                                                                    <p class="font-medium">Dzisiaj</p><p>                        <ul id="tasks-list" class="mt-2 space-y-2"></ul><ul>                        <div class="flex mt-2">
+                                                                                                    <input id="new-task-input" type="text" class="flex-1 border rounded-l px-2 py-1 text-sm focus:outline-none" placeholder="Dodaj nowe zadanie...">
+                                                                                                    </div></ul></ul></p></p></div></form></h2></h2>                                                <!-- Kalendarz i Zadania (duplicate removed) -->
+                                                            <div class="bg-white p-6 rounded-lg shadow">
+                                                                                <h2 class="text-lg font-semibold mb-4">Kalendarz i Zadania</h2><h2>                <form id="tasks-form" class="space-y-3">
+                                                                                                        <div class="text-sm text-gray-600">
+                                                                                                                                    <p class="font-medium">Dzisiaj</p><p></p></p></div></form></h2></h2></div>            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">                        <ul id=""tasks-list" class=""mt-2 space-y-2"></ul><ul>                        <div class="flex mt-2">
+                                                                                                                                                                    <input id="new-task-input" type="text" class="flex-1 border rounded-l px-2 py-1 text-sm focus:outline-none" placeholder="Dodaj nowe zadanie...">
+                                                                                                                                                                                                <button type="submit" class="bg-blue-500 text-white px-3 py-1 rounded-r text-sm">Dodaj</button><button>                        </button><div>                    </div><div>                </div><form action="            </div>
+                                                                                                                                                                                                    "></orm</div></div></button></button></div></ul></ul>                                                    <!-- Kalendarz i Zadania (duplicate                     <div class="text-sm text-gray-600">
+                                                                                <p class="font-medium">Dzisiaj</p>
+                                                                                removed) -->
+                                                                <div class="bg-white p-6 rounded-lg shadow">
+                                                                                    <h2 class="text-lg font-semibold mb-4">Kalendarz i Zadania</h2><h2>                <form id="tasks-form" class="space-y-3">
+                                                                                        </form></h2></h2></div></main>iv></div></div>                    <style>
+
+                    </style></script></title></title><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+    <nav class="bg-white shadow-sm">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                                <div class="flex justify-between h-16">
+                                                    <div class="flex items-center">
+                                                                            <h1 class="text-xl font-bold text-gray-900">Planer ycia</h1>
+                                                                                            </div>
+                <h2 class="text-lg font-semibold mb-4">Nawyki</h2>
+                                <form id="habits-form" class="space-y-3">
+                                                        <ul id="habits-list" class="space-y-2"></ul>
+                                                                            <div class="flex mt-2">
+                                                                                                                                                                                            <div class="flex items-center">
+                </form>
+                            </div>
+                                        <div class="bg-white p-6 rounded-lg shadow">
+                                                            <h2 class="text-lg font-semibold mb-4">Kalendarz i Zadania</h2>
+                                                                            <form id="tasks-form" class="space-y-3">
+                                                                                                    <div                        <p class="font-medium">Dzisiaj</p>
+                                                                                                                                <ul id="tasks-list" class="mt-2 space-y-2"></ul>
+                                                                                                                                 class="text-sm text-gray-600">
+                                                                                                                                                                                                                                            <span class="text-sm text-gray-500">Witaj w swoim asystencie codziennoci</span>
+                                                                                                                                                    </div>
+                                                                                                                                                                </div>
+                    </div>
+                                    </form>
+                                                </div>
+                                                
+                                                            <!-- Cele -->
+                                                                        <!-- Cele (duplicate removed) -->
+                                                                                    <div class="bg-white p-6 rounded-lg shadow">
+                                                                                                        <h2 class="text-lg font-semibold mb-4">Cele</h2>
+                                                                                                                        <form id="goals-form" class="space-y-4">
+                                                                                                                                                <ul id="goals-list" class="space-y-2"></ul>
+                                                                                                                                                                    <div class="flex mt-2">
+                                                                                                                                                                                                <input id="new-goal-input" type="text" class="flex-1 border rounded-l px-2 py-1 text-sm focus:outline-none" placeholder="Dodaj nowy cel...">
+                                                                                                                                                                                                                        <input id="new-goal-progress" type="number" min="0" max="100" class="w-20 border-t border-b border-r rounded-r px-2 py-1 text-sm focus:outline-none" placeholder="%">
+                                                                                                                                                                                                                                                <button type="submit" class="bg-blue-500 text-white px-3 py-1 rounded text-sm ml-2">Dodaj</button>
+                                                                                                                                                                                                                                                                    </div>
+                                                                                                                                                                                                                                                                                    </form>
+                                                                                                                                                                                                                                                                                                </div>
+                                                                                                                                                                                                                                                                                                            <div class="bg-white p-6 rounded-lg shadow">
+                                                                                                                                                                                                                                                                                                                                <h2 class="text-lg font-semibold mb-4">Cele</h2>
+                                                                                                                                                                                                                                                                                                                                </div>                <form id="goals-form" class="space-y-4">
+                                                                                                                                                                                                                                                                                                                                                        <ul id="goals-list" class="space-y-2"></ul>
+                                                                                                                                                                                                                                                                                                                                                                            <div class="flex mt-2">
+                                                                                                                                                                                                                                                                                                                                                                                                        <input id="new-goal-input" type="text" class="flex-1 border rounded-l px-2 py-1 text-sm focus:outline-none" placeholder="Dodaj nowy cel...">
+                                                                                                                                                                                                                                                                                                                                                                                                                                <input id="new-goal-progress" type="number" min="0" max="100" class="w-20 border-t border-b border-r rounded-r px-2 py-1 text-sm focus:outline-none" placeholder="%">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                        <button type="submit" class="bg-blue-500 text-white px-3 py-1 rounded text-sm ml-2">Dodaj</button>
+                <div class="text-center">
+                                        <p class="text-lg italic text-gray-600">"Najwiksz chwa nie jest nigdy nie upa, ale powsta za kadym razem, gdy upadniemy."</p>
+                                                            <p class="mt-2 text-sm text-gray-500">- Konfucjusz</p>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </div>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </form>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </div>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </nav>                                                                                                                                                                                                                                                                                                                                                            <!--            <!-- Inspirujcy Cytat -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <div class="bg-white p-6 rounded-lg shadow md:col-span-2 lg:col-span-3">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <div class="text-center">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <p class="text-lg italic text-gray-600">"Najwiksz chwa nie jest nigdy nie upa, ale powsta za kadym razem, gdy upadniemy."</p>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                Main Content -->
+                                                                                                                                                                                    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                                                                                                                                                                                                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <footer class="bg-white mt-8        </div>
+        ">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+    <script src="main.js"></script>
+    </body>
+    </html>
+                                    <p class="text-center text-sm text-gray-500"> 2025 Planer ycia. Wszystkie prawa zastrzeone.</p>
+                                                                                                                                                                                                                                                <!-- Kalendarz i Zadania (duplicate removed) -->
+                                                                                                                                                                                                                body {
+                <h2 class="text-lg font-semibold mb-4">Nawyki</h2>
+
+            <!-- Cele -->
+                        <!-- Cele (duplicate removed) -->
+                                    <div class="bg-white p-6 rounded-lg shadow">
+                                                        <h2 class="text-lg font-semibold mb-4">Cele</h2>
+                                                                        <form id="goals-form" class="space-y-4">
+                                                                                                <ul id="goals-list" class="space-y-2"></ul>
+                                                                                                                    <div class="flex mt-2">
+                                                                                                                                                <input id="new-goal-input" type="text" class="flex-1 border rounded-l px-2 py-1 text-sm focus:outline-none" placeholder="Dodaj nowy cel...">
+                                                                                                                                                                        <input                        <button type="submit" class="bg-blue-500 text-white px-3 py-1 rounded text-sm ml-2">Dodaj</button>
+                                                                                                                                                                                            </div>
+                                                                                                                                                                                                            </form>
+                                                                                                                                                                                                                        </div>
+                                                                                                                                                                                                                                    <div class="bg-white p-6 rounded-lg shadow">
+                                                                                                                                                                                                                                                        <h2 class="text-lg font-semibold mb-4">Cele</h2>
+                                                                                                                                                                                                                                                                        <form id="goals-form" class="space-y-4">
+                                                                                                                                                                                                                                                                                                <ul id="goals-list" class="space-y-2"></ul>
+                                                                                                                                                                                                                                                                                                 id="new-goal-progress" type="number" min="0" max="100" class="w-20 border-t border-b border-r rounded-r px-2 py-1 text-sm focus:outline-none" placeholder="%">
+                                                                                                                                                                        -->-->               <form id="habits-form" class="space-y-3">
+                                                        <ul id="habits-list" class="space-y-2"></ul>
+                                                                            <div class="flex mt-2">
+                                                                                                        <input id="new-habit-input" type="text" class="flex-1 border rounded-l px-2 py-1 text-sm focus:outline-none" placeholder="Dodaj nowy nawyk...">
+                                                                                                                                <button type="submit" class="bg-blue-500 text-white px-3 py-1 rounded-r text-sm">Dodaj</button>
+                                                                                                                                                    </div>
+                                                                                                                                                                font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head><head><body class="bg-gray-50">
+        <!-- Navbar -->
+            <nav class="bg-white shadow-sm">
+                        <div class=""max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                                    <div class="flex justify-between h-16">
+                                                        <div class=""flex items-center">
+                                                        </div>
+                                    </div>
+            </nav>-->
+    <!-- Main Content -->
+        <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                    <div class=""grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                                <!-- Kalendarz i Zadania (duplicate removed) -->
+                                            <div class="bg-white p-6 rounded-lg shadow">
+                                                                <h2 class=""text-lg font-semibold mb-4">Kalendarz i Zadania</h2><h2>                <form id="tasks-form" class="space-y-3">
+                                                                                        <div class=""text-sm text-gray-600">
+                                                                                                                <p class="font-medium">Dzisiaj</p><p>                        <ul id="tasks-list" class="mt-2 space-y-2"></ul><ul>                        <div class="flex mt-2">
+                                                                                                                                                <input id=""new-task-input" type=""text" class=""flex-1 border rounded-l px-2 py-1 text-sm focus:outline-none" placeholder=""Dodaj nowe zadanie...">
+                                                                                                                                                                            <button type="submit" class="bg-blue-500 text-white px-3 py-1 rounded-r text-sm">Dodaj</button><button>                        </button><div>                    </div><div></iv</iv></button></button>"
+                                                                                                                </div></ul></ul></p></p></div>
+                                                                </form></h2></h2>
+                                            </div>
+        </main>-->    <!-- Main Content -->
+        <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                    <div class=""grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    </div>
+        </main></body></head></head>
+<body class="bg-gray-50">
+                </body><div>            </div><div>        </div><div>    </div><nav>
+                <form id=""goals-form" class=""space-y-4">
+                                        <ul id=""goals-list" class=""space-y-2"></ul><ul>                    <div class="flex mt-2">
+                                                                    <input id=""new-goal-input" type=""text" class=""flex-1 border rounded-l px-2 py-1 text-sm focus:outline-none" placeholder=""Dodaj nowy cel...">
+                                                                                            <input id="new-goal-progress" type="number" min="0" max="100" class="w-20 border-t border-b border-r rounded-r px-2 py-1 text-sm focus:outline-none" placeholder="%">
+                                                                                                                    <button type="submit" class="bg-blue-500 text-white px-3 py-1 rounded text-sm ml-2">Dodaj</button><button>                    </button><div>                </div><form action="            </div>
+                                                                                                                                    <div class="bg-white p-6 rounded-lg shadow">
+
+                                                                                                                                    </form>"></form></div></button></button>"
+                                        </div></ul></ul>                <h2 class=""text-lg font-semibold mb-4">Cele</h2><h2>                <form id="goals-form" class="space-y-4">
+                                                                <ul id=""goals-list" class=""space-y-2"></ul><ul>                    <div class="flex mt-2">
+                                                                                            <input id=""new-goal-input" type=""text" class=""flex-1 border rounded-l px-2 py-1 text-sm focus:outline-none" placeholder=""Dodaj nowy cel...">
+                                                                                                                    <input id="new-goal-progress" type="number" min="0" max="100" class="w-20 border-t border-b border-r rounded-r px-2 py-1 text-sm focus:outline-none" placeholder="%">
+                                                                                                                                            <button type="submit" class="bg-blue-500 text-white px-3 py-1 rounded text-sm ml-2">Dodaj</button><button>                    </button><div></div></button></button>"
+                                                                </div></ul></ul>
+                                        </form></h2></h2>
+                </form>
+                </nav></div></div></div>    <!-- Navbar -->
+    </html><nav>
+
+    </nav>    <nav class="bg-white shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+
+                <div class="flex items-center">
+                    <h1 class="text-xl font-bold text-gray-900">Planer Życia</h1>
+                </div>
+                <div class="flex items-center">
+                        <p class=""font-medium">Dzisiaj</p><p>                        <ul id="tasks-list" class="mt-2 space-y-2"></ul><ul>                        <div class="flex mt-2">
+                                                        <input id=""new-task-input" type=""text" class=""flex-1 border rounded-l px-2 py-1 text-sm focus:outline-none" placeholder=""Dodaj nowe zadanie...">
+                                                                                    <button type="submit" class="bg-blue-500 text-white px-3 py-1 rounded-r text-sm">Dodaj</button><button>                        </button><div></div></button></button>"
+                <h2 class=""text-lg font-semibold mb-4">Kalendarz i Zadania</h2><h2></h2></h2>                        </div></ul></ul></p></p>                    <span class="text-sm text-gray-500">Witaj w swoim asystencie codzienności</span>
+            <div class=""bg-white p-6 rounded-lg shadow">
+                            <input id=""new-task-input" type=""text" class=""flex-1 border rounded-l px-2 py-1 text-sm focus:outline-none" placeholder=""Dodaj nowe zadanie...">
+                                                        <button type="submit" class="bg-blue-500 text-white px-3 py-1 rounded-r text-sm">Dodaj</button><button>                        </button><div>                    </div><div>                </div><form action=""></form></div></div></button></button>"                            <h2 class="text-lg font-                        <p class="font-medium">Dzisiaj</h2><p>                        <ul id="tasks-list" class="mt-2 space-y-2"></ul><ul>                        <div class="flex mt-2">
+                                                            <input id=""new-task-input" type=""text" class=""flex-1 border rounded-l px-2 py-1 text-sm focus:outline-none" placeholder=""Dodaj nowe zadanie...">
+                        </div><div>                    </div><div></div></div>                                                                                                    <form id=""tasks-form" class=""space-y-3">                                                                                                                            <div class=""text-sm text-gray-600">
+                                                                                                                            </div>
+                                                                                                    </form>    <button type="submit" class="bg-blue-500 text-white px-3 py-1 rounded-r text-sm">Dodaj</button><button></                        </div>
+                                                                                            utton</                    </div>
+                            <button type=""submit" class=""bg-blue-500 text-white px-3 py-1 rounded-r text-sm">Dodaj</button><button>                        </button><div>                    </div><div>                </div><form action="            </div>
+                                            <div class="bg-white p-6 rounded-lg shadow">
+
+                                            </form>"></form></div></div></button></button>                                                                                        </form>
+                                                                                    </div>
+                                                                                                <div class="bg-white p-6 rounded-lg shadow">
+                                                                                                                    <h2 class=""text-lg font-semibold mb-4">Kalendarz i Zadania</h2><h2>                <form id="tasks-form" class="space-y-3">
+                                                                                                                                            <div class=""text-sm text-gray-600">
+                                                                                                                                                                    <p class="font-medium">Dzisiaj</p><p>                        <ul id="tasks-list" class="mt-2 space-y-2"></ul><ul>                        <div class="flex mt-2">
+                                                                                                                                                                                                    <input id=""new-task-input" type=""text" class=""flex-1 border rounded-l px-2 py-1 text-sm focus:outline-none" placeholder=""Dodaj nowe zadanie...">
+                                                                                                                                                                                                    "                                                                                                                                                                    </iv                            <button type="submit" class="bg-blue-500 text-white px-3 py-1 rounded-r text-sm">Dodaj</button><button>                        </button><div>                    </div><div></div></div></button></button></ul></ul></p></p></div>
+            </form><div>            <div class="bg-white p-6 rounded-lg shadow">
+                                <h2 class=""text-lg font-semibold mb-4">Nawyki</h2><h2>                <form id="habits-form" class="space-y-3">
+                                                        <ul id=""habits-list" class=""space-y-2"></ul><ul>                    <div class="flex mt-2">
+                                                                                    <input id=""new-habit-input" type=""text" class=""flex-1 border rounded-l px-2 py-1 text-sm focus:outline-none" placeholder=""Dodaj nowy nawyk...">
+                                                                                                            <button type="submit" class="bg-blue-500 text-white px-3 py-1 rounded-r text-sm">Dodaj</button><button>                    </button><div>                </div><form action="            </div>
+                                                                                                                
+                                                                                                                            <!-- Cele -->
+                                                                                                                        -->"></form></div></button></button>"
+                                                        </div></ul></ul>
+                                </form></h2></h2>
+            </div><div>
+                            <!-- Cele -->
+                                        <!-- Cele (duplicate removed) -->
+                                                    <div class="bg-white p-6 rounded-lg shadow">
+                                                                        <h2 class=""text-lg font-semibold mb-4">Cele</h2><h2>                <form id="goals-form" class="space-y-4">
+                                                                                                <ul id=""goals-list" class=""space-y-2"></ul><ul>                    <div class="flex mt-2">
+                                                                                                                            <input id=""new-goal-input" type=""text" class=""flex-1 border rounded-l px-2 py-1 text-sm focus:outline-none" placeholder=""Dodaj nowy cel...">
+                                                                                                                            "
+                                                                                                </div></ul></ul>
+                                                                        </form></h2></h2>
+                                                    </div>-->
+            </div>            </div><div>
+            </div><div>
+                            <!-- Inspirujcy Cytat -->
+                                        <div class="bg-white p-6 rounded-lg shadow md:col-span-2 lg:col-span-3">
+
+                                        </div>-->
+            </div>                            <!-- Cele -->
+                                        <!-- Cele (duplicate removed) -->
+                                                    <div class="bg-white p-6 rounded-lg shadow">
+                                                                        <h2 class=""text-lg font-semibold mb-4">Cele</h2><h2>                <form id="goals-form" class="space-y-4">
+    <footer class=""bg-white mt-8">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+                            <p class=""text-center text-sm text-gray-500"> 2025 Planer ycia. Wszystkie prawa zastrzeone.</p><p></p></p>
+            </div></footer>
+                                                                        </form></h2></h2>
+                                                    </div>-->
+                </div><div></div>            </div>            </div>                                                                                                                    </form></h2></h2>            </nav><div>        </div><div>    </div><main>
+                        <!-- Footer -->
+                        -->
+                </main></div></div>                                                                                                </div>utton>"
+                            </div></ul></ul></p></h2>semibold mb-4">Kalendarz i Zadania</h2><h2>                <form id="tasks-form" class="space-y-3">
+                                                    <div class=""text-sm text-gray-600">
+                                                    </div>
+                            </form></h2></h2></div>                </div>
+                <h2 class=""text-lg font-semibold mb-4">Nawyki</h2><h2></h2></h2>            </div>                <form id=""habits-form" class=""space-y-3">
+                                        <ul id=""habits-list" class=""space-y-2"></ul><ul>                    <div class="flex mt-2">
+                                                                    <input id=""new-habit-input" type=""text" class=""flex-1 border rounded-l px-2 py-1 text-sm focus:outline-none" placeholder=""Dodaj nowy nawyk...">
+                                                                                            <button type="submit" class="bg-blue-500 text-white px-3 py-1 rounded-r text-sm">Dodaj</button><button>                    </button><div>                </div><form action="            </div>
+                                                                                                
+                                                                                                            <!-- Cele -->
+                                                                                                                    <!-- Cele (duplicate removed) -->
+                                                                                                                            <div class="bg-white p-6 rounded-lg shadow">
+                                                                                                                                                <h2 class=""text-lg font-semibold mb-4">Cele</h2><h2>                <form id="goals-form" class="space-y-4">
+                                                                                                                                                                        <ul id=""goals-list" class=""space-y-2"></ul><ul>                    <div class="flex mt-2">
+                                                                                                                                                                                                    <input id=""new-goal-input" type=""text" class=""flex-1 border rounded-l px-2 py-1 text-sm focus:outline-none" placeholder=""Dodaj nowy cel...">
+                                                                                                                                                                                                                            <input id="new-goal-progress" type="number" min="0" max="100" class="w-20 border-t border-b border-r rounded-r px-2 py-1 text-sm focus:outline-none" placeholder="%">
+                                                                                                                                                                                                                                                    <button type="submit" class="bg-blue-500 text-white px-3 py-1 rounded text-sm ml-2">Dodaj</button><button>                    </button><div>                </div><form action="            </div>
+                                                                                                                                                                                                                                                                    <div class="bg-white p-6 rounded-lg shadow">
+                                                                                                                                                                                                                                                                                        <h2 class=""text-lg font-semibold mb-4">Cele</h2><h2>                <form id="goals-form" class="space-y-4">
+                                                                                                                                                                                                                                                                                                                <ul id=""goals-list" class=""space-y-2"></ul><ul></                    <div class="flex mt-2">
+                                                                                                                                                                                                                                                                                                                                            <input id="new-goal-input" type="text" class="flex-1 border rounded-l px-2 py-1 text-sm focus:outline-none" placeholder="Dodaj nowy cel...">
+                                                                                                                                                                                                                                                                                                                                                                    <input id="new-goal-progress" type="number" min="0" max="100" class="w-20 border-t border-b border-r rounded-r px-2 py-1 text-sm focus:outline-none" placeholder="%">
+                                                                                                                                                                                                                                                                                                                                                                                            <button type="submit" class="bg-blue-500 text-white px-3 py-1 rounded text-sm ml-2">Dodaj</button><button>                    </button><div>                </div><form action="            </div>
+                                                                                                                                                                                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                                                                                                                                                                                            <!-- Inspirujcy Cytat -->
+                                                                                                                                                                                                                                                                                                                                                                                                                    <div class="bg-white p-6 rounded-lg shadow md:col-span-2 lg:col-span-3">
+                                                                                                                                                                                                                                                                                                                                                                                                                                        <div class=""text-center">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                            <p class="text-lg italic text-gray-600">"Najwiksz chwa nie jest nigdy nie upa, ale powsta za kadym razem, gdy upadniemy."</p><p>                    <p class="mt-2 text-sm text-gray-500">- Konfucjusz</p><p>                </p><div>            </div><div>        </div><div>    </div><main>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <!-- Footer -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <footer class="bg-white mt-8">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <div class=""max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <p class="text-center text-sm text-gray-500"> 2025 Planer ycia. Wszystkie prawa zastrzeone.</p><p>        </p><div>    </div><footer>    <script src="main.js"></script>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </footer><body>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </body><html><!DOCTYPE html>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </html><html lang=""pl">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <head>
+
+            </head><div>
+                            <!-- Inspirujcy Cytat -->
+                                        <div class="bg-white p-6 rounded-lg shadow md:col-span-2 lg:col-span-3">
+
+                                        </div>-->
+            </div>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </head></html>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </body></script></footer></div></p></p></div>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </footer>-->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                            </main></div></div></div></p></p></p></div>
+                                                                                                                                                                                                                                                                                                                                                                                                                    </form>-->"></form></div></button></button>l></ul>
+                                                                                                                                                                                                                                                                                        </form></h2></h2>
+                                                                                                                                                                                                                                                                    </form>"></form></div></button></button>"
+                                                                                                                                                                        </div></ul></ul>
+                                                                                                                                                </form></h2></h2>
+                                                                                                                            </form>-->-->"></form></div></button></button>"
+                                        </div></ul></ul>
+                </form>                <form id=""tasks-form" class=""space-y-3">
+                                        <div class=""text-sm text-gray-600">
+                                                                <p class="font-medium">Dzisiaj</p><p>                        <ul id="tasks-list" class="mt-2 space-y-2"></ul><ul>                        <div class="flex mt-2">
+                                                                                                <input id=""new-task-input" type=""text" class=""flex-1 border rounded-l px-2 py-1 text-sm focus:outline-none" placeholder=""Dodaj nowe zadanie...">
+                                                                                                "
+                                                                </div></ul></ul></p></p></div>
+                </form>        </div>
+    </nav>
+
+    <!-- Main Content -->
+                    <div class=""flex mt-2">
+                                            <input id="new-habit-input" type="text" class="flex-1 border rounded-l px-2 py-1 text-sm focus:outline-none" placeholder="Dodaj nowy nawyk...">
+                                                                <button type="submit" class="bg-blue-500 text-white px-3 py-1 rounded-r text-sm">Dodaj</button><button>                    </button><div>                </div><form action="            </div>
+                                                                    "></form></div></button></button></div>    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                    <ul id=""habits-list" class=""space-y-2"></ul><ul>                    <div class="flex mt-2">
+                                                <input id=""new-habit-input" type=""text" class=""flex-1 border rounded-l px-2 py-1 text-sm focus:outline-none" placeholder=""Dodaj nowy nawyk...">
+                                                                        <button type="submit" class="bg-blue-500 text-white px-3 py-1 rounded-r text-sm">Dodaj</button><button>                    </button><div></div></button></button>"
+                    </div></ul></ul>                    <ul id=""habits-list" class=""space-y-2"></ul><ul>                    <div class="flex mt-2">
+                                                <input id=""new-habit-input" type=""text" class=""flex-1 border rounded-l px-2 py-1 text-sm focus:outline-none" placeholder=""Dodaj nowy nawyk...">
+                                                "
+                    </div></ul></ul>        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">                </div><form action="            </div>
+                        "></
+                                    <!-- Cele -->
+                                                 <!-- Cele (duplicate removed) -->
+                                                  orm>
+            <!-- Kalendarz i Zadania (duplicate removed) -->
             <div class="bg-white p-6 rounded-lg shadow">
                 <h2 class="text-lg font-semibold mb-4">Kalendarz i Zadania</h2>
-                <form id="tasks-form" class="space-y-3">
-                    <div class="text-sm text-gray-600">
+                </div><form action="            </div>
+                                <div class="bg-white p-6 rounded-lg shadow">
+                                                    <h2 class=""text-lg font-semibold mb-4">Kalendarz i Zadania</h2><h2>                <form id="tasks-form" class="space-y-3">
+                                                                            <div class=""text-sm text-gray-600">
+                                                                            </div>                                                    </form></h2></h2>
+                    <div class=""text-sm text-gray-600">
+                                            <p class="font-medium">Dzisiaj</p><p>                        <ul id="tasks-list" class="mt-2 space-y-2"></ul><ul>                        <div class="flex mt-2">
+                                                                            <input id=""new-task-input" type=""text" class=""flex-1 border rounded-l px-2 py-1 text-sm focus:outline-none" placeholder=""Dodaj nowe zadanie...">
+                                                                                <!-- Footer -->
+                                                                                    <footer class="bg-white mt-8">
+                                                                                                <div class=""max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+                                                                                                            <p class="text-center text-sm text-gray-500"> 2025 Planer ycia. Wszystkie prawa zastrzeone.</p><p>        </p><div>    </div><footer>    <script src="main.js"></script>
+                                                                                                            </script></footer></div></p></p></div>
+                                                                                    </footer>-->
+                                                                            "
+                                            </div></ul></ul></p></p></div>                                </form>"></form>                <form id="tasks-form" class="space-y-3">
+            <div class=""bg-white p-6 rounded-lg shadow md:col-span-2 lg:col-span-3">
+                            <div class="text-center">
+                                                    <p class=""text-lg italic text-gray-600">"Najwiksz chwa nie jest nigdy nie upa, ale powsta za kadym razem, gdy upadniemy."</p><p>                    <p class="mt-2 text-sm text-gray-500">- Konfucjusz</p><p>                </p><div>            </div><div>        </div><div>    </div><main></main></div></div></div></p></p></p>
+                            </div>                    <div class="text-sm text-gray-600">
                         <p class="font-medium">Dzisiaj</p>
                         <ul id="tasks-list" class="mt-2 space-y-2"></ul>
-                        <div class="flex mt-2">
+                </div><form action="            </div>
+                    "></form>                        <div class="flex mt-2">
+                            <input id="new-task-input" type="text" class="flex-1 border rounded-l px-2 py-1 text-sm focus:outline-none" placeholder="Dodaj nowe zadanie...">
+                            <button type=""submit" class=""bg-blue-500 text-white px-3 py-1 rounded-r text-sm">Dodaj</button><button>                        </button><div>                    </div><div>                </div><form action=""></form></div></div></button></button>                            <button type="submit" class="bg-blue-500 text-white px-3 py-1 rounded-r text-sm">Dodaj</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow">
+                <h2 class="text-lg font-semibold mb-4">Kalendarz i Zadania</h2>
+                    <div class=""flex mt-2">
+                                            <input id="new-goal-input" type="text" class="flex-1 border rounded-l px-2 py-1 text-sm focus:outline-none" placeholder="Dodaj nowy cel...">
+                                                                <input id="new-goal-progress" type="number" min="0" max="100" class="w-20 border-t border-b border-r rounded-r px-2 py-1 text-sm focus:outline-none" placeholder="%">
+                                                                                    <button type="submit" class="bg-blue-500 text-white px-3 py-1 rounded text-sm ml-2">Dodaj</button><button>                    </button><div>                </div><form action="            </div>
+                                                                                        
+                                                                                                    <!-- Inspirujcy Cytat -->
+                                                                                                -->"></form></div></button></button></div>                <h2 class=""text-lg font-semibold mb-4">Nawyki</h2><h2>                <form id="habits-form" class="space-y-3">                                        <ul            <div class="bg-white p-6 rounded-lg shadow md:col-span-2 lg:col-span-3">
+                                                                                                                    <div class=""text-center">
+                                                                                                                                        <p class="text-lg italic text-gray-600">"Najwiksz chwa nie jest nigdy nie upa, ale powsta za kadym razem, gdy upadniemy."</p><p>                    <p class="mt-2 text-sm text-gray-500">- Konfucjusz</p><p>                </p><div></iv</></p></p></div>
+                                                                                                </div>id=""habits-list" class=""space-y-2"></ul><ul></ul></ul>
+                </form></h2></h2>                <form id="tasks-form" class="space-y-3">
+                    <div class="text-sm text-gray-600">
+                        <p class="font-medium">Dzisiaj</p>
+                        <ul id="tasks-list" class="mt-2 space-y-2"></ul>                    <div class=""flex mt-2">
+                                                <input id="new-habit-input" type="text" class="flex-1 border rounded-l px-2 py-1 text-sm focus:outline-none" placeholder="Dodaj nowy nawyk...">
+                                                                    <button type="submit" class="bg-blue-500 text-white px-3 py-1 rounded-r text-sm">Dodaj</button><button>                    </button><div>                </div><form action="            </div>
+                                                                        
+                                                                                    <!-- Cele -->
+                                                                                -->"></orm</            <!-- Cele (duplicate removed) -->
+                                                                                            <div class="bg-white p-6 rounded-lg shadow">
+                                                                                                                <h2 class=""text-lg font-semibold mb-4">Cele</h2><h2>                <form id="goals-form" class="space-y-4">
+                                                                                                                                        <ul id=""goals-list" class=""space-y-2"></ul><ul>                    <div class="flex mt-2">
+
+                                                                                                                                        </div></ul></ul>
+                                                                                                                </form></h2></h2>
+                                                                                            </div>iv></button></button></div>
+    <!-- Footer -->
+        <footer class="bg-white mt-8">
+                    <div class=""max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+                                <p class="text-center text-sm text-gray-500"> 2025 Planer ycia. Wszystkie prawa zastrzeone.</p><p>        </p><div>    </div><footer></    <script src="main.js"></footer>script>
+                                </div>body>
+                                </footer>html>
+                                <!DOCTYPE html>
+                                ooter></div></p></p></div>
+        </footer>-->                        <div class="flex mt-2">
                             <input id="new-task-input" type="text" class="flex-1 border rounded-l px-2 py-1 text-sm focus:outline-none" placeholder="Dodaj nowe zadanie...">
                             <button type="submit" class="bg-blue-500 text-white px-3 py-1 rounded-r text-sm">Dodaj</button>
-                        </div>
+                </div><form action="            </div>
+                    
+                    "></form>                        </div>
                     </div>
                 </form>
             </div>
@@ -62,7 +566,30 @@
             <!-- Śledzenie Nawyków -->
             <!-- Nawyki (duplicate removed) -->
             <div class="bg-white p-6 rounded-lg shadow">
-                <h2 class="text-lg font-semibold mb-4">Nawyki</h2>
+            <div class=""bg-white p-6 rounded-lg shadow">
+                            <h2 class="text-lg font-semibold mb-4">Nawyki</h2><h2>                <form id="habits-form" class="space-y-3">
+                        <input id=""new-goal-input" type=""text" class=""flex-1 border rounded-l px-2 py-1 text-sm focus:outline-none" placeholder=""Dodaj nowy cel...">
+                        "                                                   <ulid                        <input id="new-goal-progress" type="number" min="0" max="100" class="w-20 border-t border-b border-r rounded-r px-2 py-1 text-sm focus:outline-none" placeholder="%">
+                                                    <button type="submit" class="bg-blue-500 text-white px-3 py-1 rounded text-sm ml-2">Dodaj</button><button>                    </button><div>                </div><form action="            </div>
+                                                                    <div class="bg-white p-6 rounded-lg shadow">
+                                                                                        <h2 class=""text-lg font-semibold mb-4">Cele</h2><h2>                <form id="goals-form" class="space-y-4">
+                                                                                                                <ul id=""goals-list" class=""space-y-2"></ul><ul>                    <div class="flex mt-2">
+                                                                                                                                            <input id=""new-goal-input" type=""text" class=""flex-1 border rounded-l px-2 py-1 text-sm focus:outline-none" placeholder=""Dodaj nowy cel...">
+                                                                                                                                                                    <input id="new-goal-progress" type="number" min="0" max="100" class="w-20 border-t border-b border-r rounded-r px-2 py-1 text-sm focus:outline-none" placeholder="%">
+                                                                                                                                                                                            <button type="submit" class="bg-blue-500 text-white px-3 py-1 rounded text-sm ml-2">Dodaj</button><button>                    </button><div>                </div><form action="            </div>
+                                                                                                                                                                                                
+                                                                                                                                                                                                            <!-- Inspirujcy Cytat -->
+                                                                                                                                                                                                                    <div class="bg-white p-6 rounded-lg shadow md:col-span-2 lg:col-span-3">
+
+                                                                                                                                                                                                                    </form>-->"></form></div></button></button>"
+                                                                                                                </div></ul></ul>
+                                                                                        </form></h2></h2>
+                                                                    </form>"></form></div></button></button>""habits-list" class=""space-y-2"></ul><ul>                    <div class="flex mt-2">
+                                                                                <input id=""new-habit-input" type=""text" class=""flex-1 border rounded-l px-2 py-1 text-sm focus:outline-none" placeholder=""Dodaj nowy nawyk...">
+                                                                                                        <button type="submit" class="bg-blue-500 text-white px-3 py-1 rounded-r text-sm">Dodaj</button><button>                    </button><div>                </div><form action="            </div>
+                                                                                                            "></form></div></button></button>"
+                                                    </div></ul></ul>
+                            </form></h2></h2></div>                <h2 class="text-lg font-semibold mb-4">Nawyki</h2>
                 <form id="habits-form" class="space-y-3">
                     <ul id="habits-list" class="space-y-2"></ul>
                     <div class="flex mt-2">
@@ -73,13 +600,45 @@
             </div>
             <div class="bg-white p-6 rounded-lg shadow">
                 <h2 class="text-lg font-semibold mb-4">Nawyki</h2>
-                <form id="habits-form" class="space-y-3">
+    <script src=""main.js"></script>
+</div><body>
+    </body><html><!DOCTYPE html>
+    </html>
+</body></script>                <form id="habits-form" class="space-y-3">
                     <ul id="habits-list" class="space-y-2"></ul>
-                    <div class="flex mt-2">
+    <html lang=""pl">
+    <head>
+            <meta charset=""UTF-8">
+                <meta name=""viewport" content=""width=device-width, initial-scale="1.0">
+                    <title>Planer ycia - Inteligentny asystent codziennoci</title><title>    <script src="https://cdn.tailwindcss.com"></script>
+                        <!-- Dodajemy Google Fonts -->
+                            <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+                            <style>
+                                        body {
+                                                        font-family: 'Inter', sans-serif;
+                                        }
+                                            </style>
+                                            </title><head></ead<body class=""bg-gray-50">
+                                            </body>    <!-- Navbar -->
+                                            <nav class="bg-white shadow-sm">
+                                                        <div class=""max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                                                                    <div class="flex justify-between h-16">
+                                                                                        <div class=""flex items-center">
+                                                                                                            <h1 class="text-xl font-bold text-gray-900">Planer ycia</h1><h1>                </h1><div></div></h1></h1></div>                <div class=""flex items-center">
+                                                                                                                                <span class="text-sm text-gray-500">Witaj w swoim asystencie codziennoci</span><span>                </span><div>            </div><div>        </div><div>    </div><nav>
+                                                                                                                                        <!-- Main Content -->
+                                                                                                                                        -->
+                                                                                                                                </nav></div></div></div></span></span></div>                                                                    </div>
+                                            </nav>-->                                        }
+                            </style></script></title></title>
+    </head></html>                <div class="flex mt-2">
                         <input id="new-habit-input" type="text" class="flex-1 border rounded-l px-2 py-1 text-sm focus:outline-none" placeholder="Dodaj nowy nawyk...">
                         <button type="submit" class="bg-blue-500 text-white px-3 py-1 rounded-r text-sm">Dodaj</button>
                     </div>
-                </form>
+                </form><form action="            </div>
+                    
+                                <!-- Cele -->
+                            -->"></form>                </form>
             </div>
 
             <!-- Cele -->
@@ -126,3 +685,33 @@
     <script src="main.js"></script>
 </body>
 </html>
+<!DOCTYPE html>
+<html lang=""pl">
+<head>
+        <meta charset=""UTF-8">
+            <meta name=""viewport" content=""width=device-width, initial-scale="1.0">
+                <title>Planer ycia - Inteligentny asystent codziennoci</title>title>
+            </itle
+</    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Dodajemy Google Fonts -->
+     ead></html> href="https://fonts.googleapis.com/css2?famil"play=swap" rel="stylesheet">
+         <style>
+                    body {
+                                    font-family: 'Inter', sans-serif;
+                    }
+                        </style>
+                        </head><body class=""bg-gray-50">
+                            <!-- Navbar -->
+                                <nav class="bg-white shadow-sm">
+                                            <div class=""max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                                                        <div class="flex justify-between h-16">
+                                                                            <div class=""flex items-center">
+                                                                                                <h1 class="text-xl font-bold text-gray-900">Planer ycia</h1>h1>
+                                                                                                            </div>div>
+                                                                                                        </1                <div class="flex items-center">
+                                                                                                                                <span class=""text-sm text-gray-500">Witaj w swoim asystencie codziennoci</span><span>                </span><div>            </div><div>        </div><div></div></div></div></span></span>
+                                                                                                        </div>
+                                                        </div>
+                                </nav></body>
+                    }
+         </style>

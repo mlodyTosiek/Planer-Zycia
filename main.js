@@ -1,657 +1,358 @@
-// Zadania
-// const tasksForm = document.getElementById('tasks-form');
-// const tasksList = document.getElementById('tasks-list');
-// const newTaskInput = document.getElementById('new-task-input');
-// // Zadania// const tasksForm = document.getElementById('tasks-form');
-const tasksList = document.getElementById('tasks-list');
-const newTaskInput = document.getElementById('new-task-input');
-tasksForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-            const value = newTaskInput.value.trim();
-                if (value) {
-                            const li = document.createElement('li');
-                                    li.className = 'flex items-center';
-                                            li.innerHTML = `<input type='checkbox' class='mr-2'><span>${value}</span>`;
-                                                    tasksList.appendChild(li);
-                                                            newTaskInput.value = '';
-                }
-});
-                            });                            
-                            // Nawyki
-                            // const habitsForm = document.getElementById('habits-form');
-                            // const habitsList = document.getElementById('habits-list');
-                            //                             // Nawyki
-                            // const habitsForm = document.getElementById('habits-form');
-                            // consttasksList=const habitsList = document.getElementById('habits-list');
-        li.className = 'flex items-center justify-between';
-                li.innerHTML = `<span>${value}</span><div class='flex space-x-1'>${[...Array(3)].map(() => "<div class='w-6 h-6 rounded-full bg-gray-100 border border-gray-300'></div>").join('')}</div>`;
-                                            // const newHabitInput = document.getElementById('new-habit-input');
-                            // habitsForm.addEventListener('submit', function(e) {
-                            //     e.preventDefault();
-        li.className = 'flex items-center justify-between';
-                li.innerHTML = `<span>${value}</span><div class='flex space-x-1'>${[...Array(3)].map(() => "<div class='w-6 h-6 rounded-full bg-gray-100 border border-gray-300'></div>").join('')}</div>`;
-                        habitsList.appendChild(li);
-                                newHabitInput.value = '';
-                                                    }
-                                                                            });
-                                                                            
-                                                                            // Cele
-const goalsForm = document.getElementById('goals-form');
-                                                                            // const goalsForm = document.getElementById('goals-form');
-const goalsList = document.getElementById('goals-list');
-const newGoalInput = document.getElementById('new-goal-input');
-const goalsList = document.getElementById('goals-list');
-const newGoalInput = document.getElementById('new-goal-input');
-                                                                            // const goalsList = document.getElementById('goals-list');
-                <span class='text-sm font-medium'>${name}</span></span>                                                                            // const newGoalInput = document.getElementById('new-goal-input');
-                                                                            // //     const value = newHabitInput.value.trim();
-                            //     if (value) {
-        li.innerHTML = `
-                    <div class='flex justify-between items-center mb-1'>
-                                    <span class='text-sm font-medium'>${name}</span>
-                                                    <span class='text-sm text-gray-500'>${progress}%</span>
-                                                    `        const li = document.createElement('li');
-                li.className = 'flex items-center justify-between';
-                                            // document.getElementById('tasks-list');
-const newTaskInput = document.getElementById('new-task-input');
-tasksForm.addEventListener('submit', function(e) {
-    e.preventDefault();
-        const value = newTaskInput.value.trim();
-            if (value) {
-        const li = document.createElement('li');
-        li.className = 'flex items-center';
-                li.innerHTML = `<input type='checkbox' class='mr-2'><span>${value}</span>`;
-                        tasksList.appendChild(li);
-                                newTaskInput.value = '';
-                            }
-                                        });
-                                        
-                                        // Nawyki
-                                        // const habitsForm = document.getElementById('habits-form');
-                                        // const habitsList = document.getElementById('habits-list');
-                                        // const newHabitInput = document.getElementById('new-habit-input');
-                                        // habitsForm.addEventListener('submit', function(e) {
-                                        //     e.preventDefault();
-                                        //     const value = newHabitInput.value.trim();
-                                        //     if (value) {
-                                        //         const li = document.createElement('li');
-                                        //         li.className = 'flex items-center justify-between';
-                                        //         li.innerHTML = `<span>${value}</span><div class='flex space-x-1'>${[...Array(3)].map(() => "<div class='w-6 h-6 rounded-full bg-gray-100 border border-gray-300'></div>").join('')}</div>`;
-                                    // Cele
-                                    //     //         habitsList.appendChild(li);
-                                        //         newHabitInput.value = '';
-                                                                            });
-                                                                            
-                                                                            // Cele
-                                                                            // const goalsForm = document.getElementById('goals-form');
-                                                                            // //     }
-                                    });
-                                    
-                                    li.className = 'flex items-center';
-    e.preventDefault();
-        const name = newGoalInput.value.trim();
-                                liinnerHTML=    let progress = parseInt(newGoalProgress.value, 10);
-                                    if (name && !isNaN(progress) && progress >= 0 && progress <= 100) {
-                                                const li = document.createElement('li');
-                                                        li.innerHTML = `
-                                                                    <div class='flex justify-between items-center mb-1'>
-                                                                                    <span class='text-sm font-medium'>${name}</span>
-                                                                                                    <span class='text-sm text-gray-500'>${progress}%</span>
-                                                                                                                </div>
-                                                                                                                            <div class='w-full bg-gray-200 rounded-full h-2'>
-                                                                                                                                            <div class                <div class='bg-blue-600 h-2 rounded-full' style='width: ${progress}%'></div>
-                                                                                                                                                        </div>
-                                                                                                                                                                                         }`<input type='checkbox' class='mr-2'><span>${value}</span>`;        `;
-                                                                                                                                                                                                 goalsList.appendChild(li);
-                                                                                                                                                                                                         tasksListappendChildli        newGoalInput.value = '';
-                                                                                                                                                                                                                 newGoalProgress.value = '';
-                                    }
-                                });
-                                // Zadania
-                                // const tasksForm = document.getElementById('tasks-form');
-                                // const tasksList = document.getElementById('tasks-list');
-                                // const newTaskInput = document.getElementById('new-task-input');
-                                // tasksForm.addEventListener('submit', function(e) {
-                                //     e.preventDefault();
-                                //     const value = newTaskInput.value.trim();
-                                // });    if (value) {
-                                //         const li = document.createElement('li');
-                                //         li.className = 'flex items-center';
-                                //         li.innerHTML = `<input type='checkbox' class='mr-2'><span>${value}</span>`;
-                                // }                newTaskInput.value = '';
-                                            }
-                                                                        });
-                                                                        
-                                                                        // Nawyki
-const habitsForm = document.getElementById('habits-form');
-const habitsList = document.getElementById('habits-list');
-                                                                        //consthabitsFormconst newHabitInput = document.getElementById('new-habit-input');
-                                                                        // habitsForm.addEventListener('submit', function(e) {
-                                                                        //     e.preventDefault();
-                                                                        // })= document.getElementById('habits-form');
-                                                                        // const habitsList = document.getElementById('habits-list');
-                                                                        // tasksList.appendChild(li);const newHabitInput = document.getElementById('new-habit-input');
-                                                                        // habitsForm.addEventListener('submit', function(e) {
-                                                                        // })                                        newTaskInput.value = '';
-                                    }    e.preventDefault();
-                                        const value = newHabitInput.value.trim();
-                                            if (value) {
-                                                        const li = document.createElement('li');
-                                                                li.className = 'flex items-center justify-between';
-                                                                        li.innerHTML = `<span>${value}</span><div class='flex space-x-1'>${[...Array(3)].map(() => "<div class='w-6 h-6 rounded-full bg-gray-100 border border-gray-300'></div>").join('')}</div>`;
-                                                                                habitsList.appendChild(li);
-                                                                                newHabitInput        newHabitInput.value = '';
-                                                                                        }
-                                                                                    });
-                                                                                
-                                                                                }
-});
+// Inicjalizacja lokalnego storage
+const storage = {
+    save: (key, data) => localStorage.setItem(key, JSON.stringify(data)),
+    load: (key) => JSON.parse(localStorage.getItem(key) || '[]')
+};
 
-});
-
-// Nawyki
-const newHabitInput = document.getElementById('new-habit-input');
-habitsForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-            const value = newHabitInput.value.trim();
-                if (value) {
-                            const li = document.createElement('li');
-                                    li.className = 'flex items-center justify-between';
-                                            li.innerHTML = `<span>${value}</span><div class='flex space-x-1'>${[...Array(3)].map(() => "<div class='w-6 h-6 rounded-full bg-gray-100 border border-gray-300'></div>").join('')}</div>`;
-                                                    habitsList.appendChild(li);
-                                                            newHabitInput.value = '';
-                                                            // const habitsForm = document.getElementById('habits-form');    }
-                                                            // });
-                                                            // // Nawyki
-// const habitsForm = document.getElementById('habits-form');
-// // const habitsList = document.getElementById('habits-list');
-// const newHabitInput = document.getElementById('new-habit-inp
-// // Cele
-// const goalsForm = document.getElementById('goals-form');
-// const goalsList = document.getElementById('goals-list');
-// const newGoalInput = document.getElementById('new-goal-input');
-// const newGoalProgress = document.getElementById('new-goal-progress');
-// ut');
-// habitsForm.addEventListener('submit', function(e) {
-//     e.preventDefault();
-// })});
-                                                        
-                                                        // Nawyki
-                                                        // const li = document.createElement('li');
-                                li.className = 'flex items-center';
-                                        li.innerHTML = `<input type='checkbox' class='mr-2'><span>${value}</span>`;
-                                                tasksList.appendChild(li);
-const goalsForm = document.getElementById('goals-form');
-                                                        newTaskInput.value = '';
-            }
-        });
-
+// Inicjalizacja elementów DOM
+const elements = {
+    tasks: {
+        form: document.getElementById('tasks-form'),
+        list: document.getElementById('tasks-list'),
+        input: document.getElementById('new-task-input')
+    },
+    habits: {
+        form: document.getElementById('habits-form'),
+        list: document.getElementById('habits-list'),
+        input: document.getElementById('new-habit-input')
+    },
+    goals: {
+        form: document.getElementById('goals-form'),
+        list: document.getElementById('goals-list'),
+        input: document.getElementById('new-goal-input'),
+        progress: document.getElementById('new-goal-progress')
     }
-});
-// Zadania
-// const tasksForm = document.getElementById('tasks-form');
-// const tasksList = document.getElementById('tasks-list');
-// const newTaskInput = document.getElementById('new-task-input');
-// tasksForm.addEventListener('submit', function(e) {
-//     e.preventDefault();
-//     const value = newTaskInput.value.trim();
-//     if (value) {
-// }})            }       e
-            // Nawyki
-            // const habitsForm = document.getElementById('habits-form');
-            // const habitsList = document.getElementById('habits-list');
-    if (name && !isNaN(progress) && progress >= 0 && progress <= 100) {
-                const li = document.createElement('li');
+};
 
-    }            // const newHabitInput = document.getElementById('new-habit-input');
-            // habitsForm.addEventListener('submit', function(e) {
-            //     e.preventDefault();
-            //     const value = newHabitInput.value.trim();
-            //     if (value) {
-            // preventDefault();
-            const value = newTaskInput.value.trim();
-    if (value) {
-                const li = document.createElement('li');
-                        li.className = 'flex items-center';
-                                li.innerHTML = `<input type='checkbox' class='mr-2'><span>${value}</span>`;
-        tasksList.appendChild(li);
-                newTaskInput.value = '';
-                                            }
-                                                                                });
-                                                                                
-                                                                                // Nawyki
-                                                                                // const habitsForm = document.getElementById('habits-form');
-                                                                                // const habitsList = document.getElementById('habits-list');
-                                                                                // const newHabitInput = document.getElementById('new-habit-input');
-                                                                                // tasksList.appendChild(li);habitsForm.addEventListener('submit', function(e) {
-                                                                                //     e.preventDefault();
-                                                                                //     const value = newHabitInput.value.trim();
-    if (value) {
+// Obsługa zadań z kategoriami i priorytetami
+class TaskManager {
+    constructor() {
+        this.tasks = storage.load('tasks');
+        this.render();
+        this.setupEventListeners();
+    }
 
-    }           const li = document.createElement('li');
-            li.className = 'flex items-center justify-between';
-});
-// Zadania
-// const tasksForm = document.getElementById('tasks-form');
-// const tasksList = document.getElementById('tasks-list');
-//                                                                                          //     if (value) {
-                                                                                //         const li = document.createElement('li');
-                                                                                //         li.className = 'flex items-center justify-between';
-            </div>
-                    `;
-                                                                                                    //         li.innerHTML = `<span>${value}</span><div class='flex space-x-1'>${[...Array(3)].map(() => "<div class='w-6 h-6 rounded-full bg-gray-100 border border-gray-300'></div>").join('')}</div>`;
-                                                                                //         habitsList.appendChild(li);
-                                                                                //         newHabitInput.value = '';
-                                                                                //     }
-                                                                                });
-                                                                            
-                                                                            // Cele
-                                                                            // const goalsForm = document.getElementById('goals-form');
-                                                                            // const goalsList = document.getElementById('goals-list');
-                                                                            // const newGoalInput = document.getElementById('new-goal-input');
-                                                                            // const newGoalProgress = document.getElementById('new-goal-progress');
-                                                                            // goalsForm.addEventListener('submit', function(e) {
-                                                                            //     e.preventDefault();
-                                                                            //     const name = newGoalInput.value.trim();
-                                                                            //     let progress = parseInt(newGoalProgress.value, 10);
-                                                                            //     if (name && !isNaN(progress) && progress >= 0 && progress <= 100) {
-                                                                            //         const li = document.createElement('li');
-                                                                            //         li.innerHTML = `
-                                                                            //             <div class='flex justify-between items-center mb-1'>
-                                                                            //                 <span class='text-sm font-medium'>${name}</span>
-                                                                            //                 <span class='text-sm text-gray-500'>${progress}%</span>
-                                                                            // }})}})                                               newTaskInput            </div>
-                                                                            //             <div class='w-full bg-gray-200 rounded-full h-2'>
-                                                                            // value = '';                <div class='bg-blue-600 h-2 rounded-full' style='width: ${progress}%'></div>
-                                                                                        </div>
-                                                                                            `;
-                                                                                                    goalsList.appendChild(li);
-                                                                                                            newGoalInput.value = '';
-                                                                                                                    newGoalProgress.value = '';
-                                                                            }
-                                                                            });
-                                                                            // Zadania
-                                                                            // const tasksForm = document.getElementById('tasks-form');
-                                                                            // const tasksList = document.getElementById('tasks-list');
-                                                                            // const newTaskInput = document.getElementById('new-task-input');
-                                                                            // `                                                   }                                                    }tasksForm.addEventListener('submit', function(e) {
-                                                                                    e.preventDefault();
+    addTask(text, category = 'ogólne', priority = 'normalne') {
+        const task = {
+            id: Date.now(),
+            text,
+            category,
+            priority,
+            completed: false,
+            createdAt: new Date(),
+            dueDate: null
+        };
+        this.tasks.unshift(task);
+        this.save();
+        this.render();
+    }
 
-                                                                            })           tasksForm.addEventListener('submit', function(e) {    if (value) {
-                        const li = document.createElement('li');
-                                li.className = 'flex items-center';
-                                        li.innerHTML = `<input type='checkbox' class='mr-2'><span>${value}</span>`;
-                                                tasksList.appendChild(li);
-                                                        newTaskInput.value = '';
-            }
-        });
-
-        // Nawyki
-
-            }        e.preventDefault();
-            const value = newTaskInput.value.trim();
-habitsForm.addEventListener('submit', function(e) {
-
-})               if(value    e.preventDefault();
-    const value = newHabitInput.value.trim();
-     {
-                            const li = document.createElement('li');
-                                    li.className = 'flex ite    }
-                });
-        const li = document.createElement('li');
-                li.className = 'flex items-center justify-between';
-                        li.innerHTML = `<span>${value}</span><div class='flex space-x-1'>${[...Array(3)].map(() => "<div class='w-6 h-6 rounded-full bg-gray-100 border border-gray-300'></div>").join('')}</div>`;
-    e.preventDefault();
-        const name = newGoalInput.value.trim();
-            let progress = parseInt(newGoalProgress.value, 10);
-                if (name && !isNaN(progress) && progress >= 0 && progress <= 100) {
-                            const li = document.createElement('li');
-                                                    }                               habitsList        li.innerHTML = `
-                                                                <div class='flex justify-between items-center mb-1'>
-                                                                                <span class='text-sm font-medium'>${name}</span>
-                                                                                                <span class='text-sm text-gray-500'>${progress}%</span>
-                                                                                                            </div>
-                                                                                                                        <div class='w-full bg-gray-200 rounded-full h-2'>
-                                                                                                                                        <div class='bg-blue-600 h-2 rounded-full' style='width: ${progress}%'></div>
-                                                                                                                                        appendChildli;            </div>
-                                                                                                                                                `;
-                                                                                                                                                        goalsList.appendChild(li);
-                                                                                                                                                                newGoalInput.value = '';
-                                                                                                                                                                        newGoalProgress.value = '';
-                                                                                        }
-                                                                                                                                newHabitInputvalue=});
-                                                                                                                                // Zadania
-                                                                                                                                // const tasksForm = document.getElementById('tasks-form');
-                                                                                                                                // const tasksList = document.getElementById('tasks-list');
-                                                                                                                                // const newTaskInput = document.getElementById('new-task-input');
-                                                                                                                                // tasksForm.addEventListener('submit', function(e) {
-                                                                                                                                //     e.preventDefault();
-                                                                                                                                //     const value = newTaskInput.value.trim();
-                                                                                                                                //     if (value) {
-                                                                                                                                // '';
-            }
-        });
-        
-        // Cele
-        const goalsForm = document.getElementById('goals-form');
-        const goalsList = document.getElementById('goals-list');
-        const newGoalInput = document.getElementById('new-goal-input');
-            </div>
-                        <div class='w-full bg-gray-200 rounded-full h-2'>
-                                            <div class='bg-blue-600 h-2 rounded-full' style='width: ${progress}%'></div>            </div></div>
-                        </div>        const newGoalProgress = document.getElementById('new-goal-progress');
-        goalsForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                    const name = newGoalInput.value.trim();
-                        let progress = parseInt(newGoalProgress.value, 10);
-                            if (name && !isNaN(progress) && progress >= 0 && progress <= 100) {
-                                        const li = document.createElement('li');
-                                                li.innerHTML = `
-                                                            <div class='flex justify-between items-center mb-1'>
-                                                                            <span class='text-sm font-medium'>${name}</span>
-                                                                                            <span class='text-sm text-gray-500'>${progress}%</span>
-                                                                                                        </div>
-                                                                                                                    <div class='w-full bg-gray-200 rounded-full h-2'>
-                                                                                                                                    <div class='bg-blue-600 h-2 rounded-full' style='width: ${progress}%'></div>
-                                                                                                                                                </div>
-                                                                                                                                                        `;
-                                                                                                                                                                goalsList.appendChild(li);
-                                                                                                                                                                        newGoalInput.value = '';
-                                                                                                                                                                                newGoalProgress.value = '';
-                            }
-                        });
-                        `
-                            }
-        })
-                // Nawyki
-                // const habitsForm = document.getElementById('habits-form');
-                // const habitsList = document.getElementById('habits-list');
-        newHabitInput.value = '';
-            }
-                        });
-                        
-                        // Cele
-                        // const goalsForm = document.getElementById('goals-form');
-                        // const goalsList = document.getElementById('goals-list');
-                        // const newGoalInput = document.getElementById('new-goal-input');
-                        // const newGoalProgress = document.getElementById('new-goal-progress');
-                        // goalsForm.addEventListener('submit', function(e) {
-                        //     e.preventDefault();
-                        //     const name = newGoalInput.value.trim();
-                        //     let progress = parseInt(newGoalProgress.value, 10);
-                        //     if (name && !isNaN(progress) && progress >= 0 && progress <= 100) {
-                        //         const li = document.createElement('li');
-                        // // ms-center';
-                                            li.innerHTML = `<input type='checkbox' class='mr-2'><span>${value}</span>`;
-                                                    tasksList.appendChild(li);
-                                                            newTaskInput.value = '';
-                                                            // const tasksList = document.getElementById('tasks-list');
-// // Zadania
-// const tasksForm = document.getElementById('tasks-form');
-// const tasksList = document.getElementById('tasks-list');
-// const newTaskInput = document.getElementById('new-task-input');
-// tasksForm.addEventListener('submit', function(e) {
-//     e.preventDefault();
-        li.className = 'flex items-center';
-                li.innerHTML = `<input type='checkbox' class='mr-2'><span>${value}</span>`;
-        tasksList.appendChild(li);
-                newTaskInput.value = '';
-                        }
-                                            });
-
-                                            // Nawyki
-                                            const habitsForm = document.getElementById('habits-form');
-                                            const habitsList = document.getElementById('habits-list');
-                                            const newHabitInput = document.getElementById('new-habit-input');
-                                            habitsForm.addEventListener('submit', function(e) {
-
-                                            })
-                                            // Nawyki
-                                            // tasksList.appendChild(li);
-                                newTaskInput.value = '';
-        li.innerHTML = `<span>${value}</span><div class='flex space-x-1'>${[...Array(3)].map(() => "<div class='w-6 h-6 rounded-full bg-gray-100 border border-gray-300'></div>").join('')}</div>`;
-                habitsList.appendChild(li);
-                        newHabitInput.value = '';
-                                                                        }
-                                                                                                    });
-                                                                                                    
-                                                                                                    // Cele
-                                                                                                    // const goalsForm = document.getElementById('goals-form');
-                                                                                                    // const goalsList = document.getElementById('goals-list');
-                                                                                                    // const newGoalInput = document.getElementById('new-goal-input');
-                                                                                                    // const newGoalProgress = document.getElementById('new-goal-progress');
-                                                                                                    // goalsForm.addEventListener('submit', function(e) {
-                                                                                                    //     e.preventDefault();
-                                                                                                    //     const name =    let progress = parseInt(newGoalProgress.value, 10);
-                                                                                                    //     if (name && !isNaN(progress) && progress >= 0 && progress <= 100) {
-                                                                                                    //         const li = document.createElement('li');
-                                                                                                    //         li.innerHTML = `
-                                                                                                    //             <div class='flex justify-between items-center mb-1'>
-                                                                                                    //                 <span class='text-sm font-medium'>${name}</span>
-                                                                                                    //                 <span class='text-sm text-gray-500'>${progress}%</span>
-                                                                                                    // }newGoalInput            </div>
-                                                                                                    //             <div class='w-full bg-gray-200 rounded-full h-2'>
-                                                                                                    //                 <div class='bg-blue-600 h-2 rounded-full' style='width: ${progress}%'></div>
-                                                                                                    //             </div>
-                                                                                                    //         `;
-                                                                                                    // value.trim();        goalsList.appendChild(li);
-                                                                                                    //         newGoalInput.value = '';
-                                                                                                    //         newGoalProgress.value = '';
-                                                                                                    //     }
-                                                                                                                                                                                                    });
-                                                                                                                                                                                                                                                                                                        ////// Zadania
-                                                                                                                                                                                                                                                                                                        //   constvaluenewTaskInputvalueconst tasksForm = document.getElementById('tasks-form');
-                                                                                                                                                                                                                                                                                                        // const tasksList = document.getElementById('tasks-list');
-                                                                                                                                                                                                                                                                                                        // const newTaskInput = document.getElementById('new-task-input');
-                                                                                                                                                                                                                                                                                                        // tasksForm.addEventListener('submit', function(e) {
-                                                                                                                                                                                                                                                                                                        //         const li = document.createElement('li');
-                                                                                                                                                                                                                                                                                                        //         li.className = 'flex items-center';
-                                                                                                                                                                                                                                                                                                        //     e        li.innerHTML = `<input type='checkbox' class='mr-2'><span>${value}</span>`;
-                                                                                                                                                                                                                                                                                                        //         tasksList.appendChild(li);
-                                                                                                                                                                                                                                                                                                        //         newTaskInput.value = '';
-                                                                                                                                                                                                                                                                                                        //     }
-                                                                                                                                                                                                });
-                                                                                                                                                                                                
-                                                                                                                                                                                                // Nawyki
-                                                                                                                                                                                                // const habitsForm = document.getElementById('habits-form');
-                                                                                                                                                                                                // const habitsList = document.getElementById('habits-list');
-                                                                                                                                                                                                // const newHabitInput = document.getElementById('new-habit-input');
-                                                                                                                                                                                                // habitsForm.addEventListener('submit', function(e) {
-                                                                                                                                                                                                // preventDefault();
-                                                                                                                                                                                                                                                                                                        //     const value = newTaskInput.value.trim();
-                                                                                                                                                                                                                                                                                                        //     if (value) {
-                                                                                                                                                                                                                                                                                                        // trim();
-//     if (value) {
-//         const li = document.createElement('li');
-//         li.className = 'flex items-center';
-const habitsForm = document.getElementById('habits-form');
-const habitsList = document.getElementById('habits-list');
-con    e.preventDefault();
-    const value = newHabitInput.value.trim();
-        if (value) {
-                    const li = document.createElement('li');
-                            li.className = 'flex items-center justify-between';
-                                    li.innerHTML = `<span>${value}</span><div class='flex space-x-1'>${[...Array(3)].map(() => "<div class='w-6 h-6 rounded-full bg-gray-100 border border-gray-300'></div>").join('')}</div>`;
-                                            habitsList.appendChild(li);
-       const goalsForm = document.getElementById('goals-form');
-       const goalsList = document.getElementById('goals-list');
-       const newGoalInput = document.getElementById('new-goal-input');
-       const newGoalProgress = document.getElementById('new-goal-progress');
-        li.innerHTML = `
-                    <div class='flex justify-between items-center mb-1'>
-                                    <span class='text-sm font-medium'>${name}</span>
-                                                    <span class='text-sm text-gray-500'>${progress}%</span>
-                                                                </div>
-                                                                            <div class='w-full bg-gray-200 rounded-full h-2'>
-                                                                                            <div class='bg-blue-600 h-2 rounded-full' style='width: ${progress}%'></div>
-                                                                                                        </div>
-                                                                                                                `;
-                                                                                                                        goalsList.appendChild(li);
-                                                                                                                                newGoalInput.value = '';
-                                                                                                                                        newGoalProgress.value = '';
+    toggleTask(id) {
+        const task = this.tasks.find(t => t.id === id);
+        if (task) {
+            task.completed = !task.completed;
+            this.save();
+            this.render();
         }
-    });
-    // Zadania
-    // const tasksForm = document.getElementById('tasks-form');
-    // const tasksList = document.getElementById('tasks-list');
-    // const newTaskInput = document.getElementById('new-task-input');
-    // tasksForm.addEventListener('submit', function(e) {
-    //     e.preventDefault();
-    //     const value = newTaskInput.value.trim();
-    //     if (value) {
-    //     }
-        });
-        
-        // Nawyki
-        // const habitsForm = document.getElementById('habits-form');
-        // const habitsList = document.getElementById('habits-list');
-        // const newHabitInput = document.getElementById('new-habit-input');
-        // habitsForm.addEventListener('submit', function(e) {
-        //     e.preventDefault();
-        //     const value = newHabitInput.value.trim();
-        //     if (value) {
-        //         const li = document.createElement('li');
-        //         li.className = 'flex items-center justify-between';
-        //         li.innerHTML = `<span>${value}</span><div class='flex space-x-1'>${[...Array(3)].map(() => "<div class='w-6 h-6 rounded-full bg-gray-100 border border-gray-300'></div>").join('')}</div>`;
-        //         habitsList.appendChild(li);
-        // const li = document.createElement('li');
-    //         li.className = 'flex items-center';
-    //         li.innerHTML = `<input type='checkbox' class='mr-2'><span>${value}</span>`;
-    //         tasksList.appendChild(li);
-    //         newTaskInput.value = '';
-    // }})`       goalsForm.addEventListener('submit', function(e) {
+    }
+
+    deleteTask(id) {
+        this.tasks = this.tasks.filter(t => t.id !== id);
+        this.save();
+        this.render();
+    }
+
+    save() {
+        storage.save('tasks', this.tasks);
+    }
+
+    render() {
+        elements.tasks.list.innerHTML = this.tasks.map(task => `
+            <li class="flex items-center justify-between p-2 ${task.completed ? 'bg-gray-100' : ''} 
+                     ${task.priority === 'wysoki' ? 'border-l-4 border-red-500' : 
+                       task.priority === 'niski' ? 'border-l-4 border-green-500' : ''}">
+                <div class="flex items-center">
+                    <input type="checkbox" ${task.completed ? 'checked' : ''} 
+                           class="mr-2" onclick="taskManager.toggleTask(${task.id})">
+                    <span class="${task.completed ? 'line-through text-gray-500' : ''}">${task.text}</span>
+                    <span class="ml-2 text-sm text-gray-500">${task.category}</span>
+                </div>
+                <button onclick="taskManager.deleteTask(${task.id})" 
+                        class="text-red-500 hover:text-red-700">×</button>
+            </li>
+        `).join('');
+    }
+
+    setupEventListeners() {
+        elements.tasks.form.addEventListener('submit', (e) => {
             e.preventDefault();
-                const name = newGoalInput.value.trim();
-                    let progress = parseInt(newGoalProgress.value, 10);
-                        if (name && !isNaN(progress) && progress >= 0 && progress <= 100) {
-                                    const li = document.createElement('li');
-                                            li.innerHTML = `
-                                                        <div class='flex justify-between items-center mb-1'>
-                                                                        <span class='text-sm font-medium'>${name}</span>
-                                                                                        <span class='text-sm text-gray-500'>${progress}%</span>
-                                                                                                    </div>
-                                                                                                                <div class='w-full bg-gray-200 rounded-full h-2'>
-                                                                                                                                <div class='bg-blue-600 h-2 rounded-full' style='width: ${progress}%'></div>
-                                                                                                                                            </div>
-                                                                                                                                                    `;
-                                                                                                                                                            goalsList.appendChild(li);
-                                                                                                                                                                    newGoalInput.value = '';
-                                                                                                                                                                            newGoalProgress.value = '';
-        newGoalProgress.value = '';
-                                                }
-                               });
-                            // Zadania
-                                                    tasksForm.addEventListener                   });
-                    `
-                        }
-       })                                             newHabitInput.value = '';
-        }
-    });
-    
-    // Cele
-    // st newHabitInput = document.getElementById('new-habit-input');
-//const       lihabitsForm.addEventListener('submit', function(e) {
-// innerHTML = `<input type='checkbox' class='mr-2'><span>${value}</span>`;
-//         tasksList.appendChild(li);
-
-// Nawyki
-// const habitsForm = document.getElementById('habits-form');
-// const habitsList = document.getElementById('habits-list');
-// const newHabitInput = document.getElementById('new-habit-input');
-// habitsForm.addEventListener('submit', function(e) {
-//     e.preventDefault();
-//     const value = newHabitInput.value.trim();
-//     if (value) {
-//         const li = document.createElement('li');
-//         li.className = 'flex items-center justify-between';
-//         li.innerHTML = `<span>${value}</span><div class='flex space-x-1'>${[...Array(3)].map(() => "<div class='w-6 h-6 rounded-full bg-gray-100 border border-gray-300'></div>").join('')}</div>`;
-//         habitsList.appendChild(li);
-//         newHabitInput.value = '';
-//     }
-});
-//newTaskInput        newTaskInputvalue = '';
-// document.getElementById('new-t// Zadania
-const tasksForm = document.getElementById('tasks-form');
-const tasksList = document.getElementById('tasks-list');
-con    }
-});
-
-// Nawyki
-// const habitsForm = document.getElementById('habits-form');
-// stnewTaskInputconst habitsList = document.getElementById('habits-list');
-// const newHabitInput = document.getElementById('new-habit-input');
-// habitsForm.addEventListener('submit', function(e) {
-//     e.preventDefault();
-//     const value = newHabitInput.value.trim();
-//     if (value) {
-// }})= document.getElementById('new-task-input');
-tasksForm.addEventListener('submit', function(e) {
-    e.preventDefault();
-    const value = newTaskInput.value.trim();
-    if (value) {
-        tasksList.appendChild(li);
-                newTaskInput.value = '';
+            const text = elements.tasks.input.value.trim();
+            if (text) {
+                this.addTask(text);
+                elements.tasks.input.value = '';
             }
-                    const li = document.createElement('li');
-        li.className = 'flex items-center';
-        li.innerHTML = `<input type='checkbox' class='mr-2'><span>${value}</span>`;
-        tasksList.appendChild(li);
-        newTaskInput.value = '';
+        });
     }
-});
+}
 
-// Nawyki
-const habitsForm = document.getElementById('habits-form');
-const habitsList = document.getElementById('habits-list');
-const newHabitInput = document.getElementById('new-habit-input');
-habitsForm.addEventListener('submit', function(e) {
-    e.preventDefault();
-    const value = newHabitInput.value.trim();
-    if (value) {
-        const li = document.createElement('li');
-        li.className = 'flex items-center justify-between';
-        li.innerHTML = `<span>${value}</span><div class='flex space-x-1'>${[...Array(3)].map(() => "<div class='w-6 h-6 rounded-full bg-gray-100 border border-gray-300'></div>").join('')}</div>`;
-        habitsList.appendChild(li);
-        newHabitInput.value = '';
+// Obsługa nawyków z monitorowaniem postępu
+class HabitManager {
+    constructor() {
+        this.habits = storage.load('habits');
+        this.render();
+        this.setupEventListeners();
     }
-});
 
-// Cele
-const goalsForm = document.getElementById('goals-form');
-goalsForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-            const name = newGoalInput.value.trim();
-                let progress = parseInt(newGoalProgress.value, 10);
-                    if (name && !isNaN(progress) && progress >= 0 && progress <= 100) {
-                        const goalsList = document.getElementById('goals-list');
-const newGoalInput = document.getElementById('new-goal-input');
-const newGoalProgress = document.getElementById('new-goal-progress');
-goalsForm.addEventListener('submit', function(e) {
-    e.preventDefault();
-    const name = newGoalInput.value.trim();
-    let progress = parseInt(newGoalProgress.value, 10);
-    if (name && !isNaN(progress) && progress >= 0 && progress <= 100) {
-        const li = document.createElement('li');
-        li.innerHTML = `
-            <div class='flex justify-between items-center mb-1'>
-                <span class='text-sm font-medium'>${name}</span>
-                <span class='text-sm text-gray-500'>${progress}%</span>
+    addHabit(text) {
+        const habit = {
+            id: Date.now(),
+            text,
+            streak: 0,
+            lastChecked: null,
+            checkmarks: Array(3).fill(false),
+            createdAt: new Date()
+        };
+        this.habits.unshift(habit);
+        this.save();
+        this.render();
     }
-    });
-    // Zadania
-    // const tasksForm = document.getElementById('tasks-form');
-    // const tasksList = document.getElementById('tasks-list');
-    //             </div>
-            <div class='w-full bg-gray-200 rounded-full h-2'>
-                <div class='bg-blue-600 h-2 rounded-full' style='width: ${progress}%'></div>
-            </div>
-        `;
-        goalsList.appendChild(li);
-        newGoalInput.value = '';
-        newGoalProgress.value = '';
+
+    toggleCheckmark(habitId, index) {
+        const habit = this.habits.find(h => h.id === habitId);
+        if (habit) {
+            habit.checkmarks[index] = !habit.checkmarks[index];
+            
+            // Aktualizacja streaka
+            const today = new Date().toLocaleDateString();
+            if (habit.checkmarks.every(check => check)) {
+                if (habit.lastChecked !== today) {
+                    habit.streak++;
+                    habit.lastChecked = today;
+                }
+            } else {
+                habit.streak = 0;
+            }
+            
+            this.save();
+            this.render();
+        }
     }
-});removeEventListener.addEventListener('submit', function(e) {tasksForm.value.trim()
-        e.preventDefault();
-            const value = newTaskInpu
-})
-;
+
+    deleteHabit(id) {
+        this.habits = this.habits.filter(h => h.id !== id);
+        this.save();
+        this.render();
+    }
+
+    save() {
+        storage.save('habits', this.habits);
+    }
+
+    render() {
+        elements.habits.list.innerHTML = this.habits.map(habit => `
+            <li class="flex items-center justify-between p-2">
+                <div class="flex items-center">
+                    <span>${habit.text}</span>
+                    <span class="ml-2 text-sm text-gray-500">Seria: ${habit.streak} dni</span>
+                </div>
+                <div class="flex space-x-2">
+                    ${habit.checkmarks.map((checked, i) => `
+                        <button onclick="habitManager.toggleCheckmark(${habit.id}, ${i})"
+                                class="w-6 h-6 rounded-full ${checked ? 
+                                'bg-green-500 text-white' : 'bg-gray-100 border border-gray-300'}">
+                            ${checked ? '✓' : ''}
+                        </button>
+                    `).join('')}
+                    <button onclick="habitManager.deleteHabit(${habit.id})" 
+                            class="text-red-500 hover:text-red-700 ml-2">×</button>
+                </div>
+            </li>
+        `).join('');
+    }
+
+    setupEventListeners() {
+        elements.habits.form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const text = elements.habits.input.value.trim();
+            if (text) {
+                this.addHabit(text);
+                elements.habits.input.value = '';
+            }
+        });
+    }
+}
+
+// Obsługa celów z wizualizacją postępu
+class GoalManager {
+    constructor() {
+        this.goals = storage.load('goals');
+        this.render();
+        this.setupEventListeners();
+        this.initializeCharts();
+    }
+
+    addGoal(name, progress) {
+        const goal = {
+            id: Date.now(),
+            name,
+            progress: Math.min(100, Math.max(0, progress)),
+            createdAt: new Date(),
+            history: [{
+                date: new Date(),
+                progress: progress
+            }]
+        };
+        this.goals.unshift(goal);
+        this.save();
+        this.render();
+        this.updateCharts();
+    }
+
+    updateProgress(id, progress) {
+        const goal = this.goals.find(g => g.id === id);
+        if (goal) {
+            goal.progress = Math.min(100, Math.max(0, progress));
+            goal.history.push({
+                date: new Date(),
+                progress: progress
+            });
+            this.save();
+            this.render();
+            this.updateCharts();
+        }
+    }
+
+    deleteGoal(id) {
+        this.goals = this.goals.filter(g => g.id !== id);
+        this.save();
+        this.render();
+        this.updateCharts();
+    }
+
+    save() {
+        storage.save('goals', this.goals);
+    }
+
+    render() {
+        elements.goals.list.innerHTML = this.goals.map(goal => `
+            <li class="mb-4 p-3 bg-white rounded-lg shadow">
+                <div class="flex justify-between items-center mb-2">
+                    <span class="text-lg font-medium">${goal.name}</span>
+                    <div class="flex items-center">
+                        <input type="number" min="0" max="100" value="${goal.progress}"
+                               onchange="goalManager.updateProgress(${goal.id}, this.value)"
+                               class="w-16 p-1 mr-2 border rounded">
+                        <span class="text-sm text-gray-500">${goal.progress}%</span>
+                        <button onclick="goalManager.deleteGoal(${goal.id})"
+                                class="text-red-500 hover:text-red-700 ml-2">×</button>
+                    </div>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-2.5">
+                    <div class="bg-blue-600 h-2.5 rounded-full transition-all duration-500"
+                         style="width: ${goal.progress}%"></div>
+                </div>
+                <div class="mt-2 text-sm text-gray-500">
+                    Utworzono: ${new Date(goal.createdAt).toLocaleDateString()}
+                </div>
+            </li>
+        `).join('');
+    }
+
+    initializeCharts() {
+        // Inicjalizacja wykresów przy użyciu Chart.js
+        if (window.goalsChart) {
+            window.goalsChart.destroy();
+        }
+
+        const ctx = document.getElementById('goalsChart').getContext('2d');
+        window.goalsChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: this.goals.map(g => g.name),
+                datasets: [{
+                    label: 'Postęp celów',
+                    data: this.goals.map(g => g.progress),
+                    backgroundColor: 'rgba(59, 130, 246, 0.5)',
+                    borderColor: 'rgb(59, 130, 246)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 100
+                    }
+                }
+            }
+        });
+    }
+
+    updateCharts() {
+        if (window.goalsChart) {
+            window.goalsChart.data.labels = this.goals.map(g => g.name);
+            window.goalsChart.data.datasets[0].data = this.goals.map(g => g.progress);
+            window.goalsChart.update();
+        }
+    }
+
+    setupEventListeners() {
+        elements.goals.form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = elements.goals.input.value.trim();
+            const progress = parseInt(elements.goals.progress.value, 10);
+            
+            if (name && !isNaN(progress) && progress >= 0 && progress <= 100) {
+                this.addGoal(name, progress);
+                elements.goals.input.value = '';
+                elements.goals.progress.value = '';
+            }
+        });
+    }
+}
+
+// Inicjalizacja menedżerów
+const taskManager = new TaskManager();
+const habitManager = new HabitManager();
+const goalManager = new GoalManager();
+
+// System motywacyjnych cytatów
+const quotes = [
+    "Sukces to suma małych wysiłków, powtarzanych dzień po dniu.",
+    "Nie czekaj na idealny moment. Zacznij tam, gdzie jesteś i z tym, co masz.",
+    "Twoja przyszłość jest tworzona przez to, co robisz dzisiaj, nie jutro.",
+    "Każdy dzień to nowa szansa, by stać się lepszą wersją siebie.",
+    "Małe kroki też prowadzą do celu, najważniejsze to iść do przodu."
+];
+
+// Aktualizacja cytatu dnia
+function updateQuote() {
+    const quoteElement = document.getElementById('daily-quote');
+    if (quoteElement) {
+        const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+        quoteElement.textContent = randomQuote;
+    }
+}
+
+// Aktualizacja cytatu co 24 godziny
+updateQuote();
+setInterval(updateQuote, 24 * 60 * 60 * 1000);
+
+// Animacje przy dodawaniu nowych elementów
+function addAnimation(element) {
+    element.classList.add('animate-fade-in');
+    setTimeout(() => element.classList.remove('animate-fade-in'), 500);
+}
+
+// Obsługa motywów kolorystycznych
+function setTheme(theme) {
+    document.body.className = theme;
+    localStorage.setItem('theme', theme);
+}
+
+// Załadowanie zapisanego motywu
+const savedTheme = localStorage.getItem('theme');
+if (savedTheme) {
+    setTheme(savedTheme);
+}
